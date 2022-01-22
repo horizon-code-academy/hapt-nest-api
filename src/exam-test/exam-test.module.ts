@@ -4,6 +4,6 @@ import { ExamTestService } from './exam-test.service';
 
 @Module({
   controllers: [ExamTestController],
-  providers: [ExamTestService]
+  providers: [ExamTestService],
 })
 export class ExamTestModule {}

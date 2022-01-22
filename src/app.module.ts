@@ -9,7 +9,14 @@ import { ExamTestModule } from './exam-test/exam-test.module';
 import { SessionDateModule } from './session-date/session-date.module';
 
 @Module({
-  imports: [UserModule, SubjectModule, SessionModule, ExamModule, ExamTestModule, SessionDateModule],
+  imports: [
+    UserModule,
+    SubjectModule,
+    SessionModule,
+    ExamModule,
+    ExamTestModule,
+    SessionDateModule,
+  ],
   controllers: [AppController],
   providers: [AppService],
 })

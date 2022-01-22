@@ -4,6 +4,6 @@ import { SessionDateService } from './session-date.service';
 
 @Module({
   controllers: [SessionDateController],
-  providers: [SessionDateService]
+  providers: [SessionDateService],
 })
 export class SessionDateModule {}

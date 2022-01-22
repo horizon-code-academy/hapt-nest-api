@@ -1,4 +1,4 @@
-import  Subject  from '../../src/subject/subject.interface';
+import Subject from '../../src/subject/subject.interface';
 
 export const subject: Subject = {
   name: 'React',

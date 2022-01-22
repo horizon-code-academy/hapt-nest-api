@@ -1,7 +1,7 @@
 {
   "name": "haptapinest",
   "version": "0.0.1",
-  "description": "",
+  "description": "A NESTJS API to serve data for HAPT affairs management webapp. 🔌📕💵",
   "author": "",
   "private": true,
   "license": "UNLICENSED",
