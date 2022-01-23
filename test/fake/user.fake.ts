@@ -34,7 +34,7 @@ export const userB: User = {
   roles: ['student'],
   firstName: 'khairi',
   lastName: 'lokmani',
-  birthDay: new Date(1998, 7, 30),
+  birthDay: new Date(1997, 7, 30),
   address: 'sousse',
 };
 
