@@ -1,6 +1,7 @@
 import { HttpException, Injectable } from '@nestjs/common';
 import Subject from './subject.interface';
 import { subjectList } from '../../test/fake/subject.fake';
+import { type } from 'os';
 
 @Injectable()
 export class SubjectService {
@@ -10,13 +11,13 @@ export class SubjectService {
     else throw new HttpException('Not found', 404);
   }
 
-  getSubjects(name: string, phone: string, role: string): Subject[] {
-    if (name || phone || role)
+  getSubjects(name: string, field: string, description: string): Subject[] {
+    if (name || field || description)
       return subjectList.filter(
         (u) =>
-          u.phone === phone ||
-          (u.firstName + ' ' + u.lastName).includes(name) ||
-          u.roles.includes(role),
+          u.field === field ||
+          u.name.includes(name) ||
+          u.description.includes(description),
       );
     else return subjectList;
   }
