@@ -1,7 +1,6 @@
 import { HttpException, Injectable } from '@nestjs/common';
 import Subject from './subject.interface';
 import { subjectList } from '../../test/fake/subject.fake';
-import { type } from 'os';
 
 @Injectable()
 export class SubjectService {
