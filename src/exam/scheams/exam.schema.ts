@@ -9,19 +9,21 @@ export type ExamDocument = Exam & Document;
 export class Exam {
   @Prop({ required: true, type: String })
   name: string;
+
   @Prop({ required: true, type: String })
   type: string;
+
+  @Prop({
+    type: [{ type: Types.ObjectId, ref: ExamTest.name }],
+  })
+  examTests?: ExamTest[];
+
   @Prop({
     required: true,
     type: Types.ObjectId,
     ref: Subject.name,
   })
   subject: Subject;
-  @Prop({
-    type: [{ type: Types.ObjectId }],
-    ref: ExamTest.name,
-  })
-  examTests?: ExamTest[];
 }
 
 export const ExamSchema = SchemaFactory.createForClass(Exam);

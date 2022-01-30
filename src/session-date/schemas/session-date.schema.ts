@@ -28,7 +28,7 @@ export class SessionDate {
 
   @Prop({
     required: true,
-    type: { required: true, type: Types.ObjectId, ref: User.name },
+    type: { type: Types.ObjectId, ref: User.name },
   })
   teacher: User;
 
