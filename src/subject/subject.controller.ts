@@ -8,8 +8,9 @@ import {
   Put,
   Query,
 } from '@nestjs/common';
-import Subject from './subject.interface';
+
 import { SubjectService } from './subject.service';
+import { Subject } from './schemas/subject.schema';
 
 @Controller('subject')
 export class SubjectController {

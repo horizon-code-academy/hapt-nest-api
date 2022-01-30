@@ -1,9 +1,8 @@
-import Session from '../../src/session/session.interface';
-import { subject } from './subject.fake';
+import { Session } from '../../src/session/schemas/session.schema';
 import { user, userA, userB } from './user.fake';
+import { subject } from './subject.fake';
 
 export const session: Session = {
-  _id: '1',
   name: 'Dev16',
   start_date: new Date(2021, 10, 20),
   end_date: new Date(2022, 3, 20),
@@ -13,7 +12,6 @@ export const session: Session = {
 };
 
 export const sessionA: Session = {
-  _id: '2',
   name: 'Dev15',
   start_date: new Date(2021, 10, 20),
   end_date: new Date(2022, 3, 20),
@@ -23,7 +21,6 @@ export const sessionA: Session = {
 };
 
 export const sessionB: Session = {
-  _id: '3',
   name: 'Dev14',
   start_date: new Date(2021, 10, 20),
   end_date: new Date(2022, 3, 20),

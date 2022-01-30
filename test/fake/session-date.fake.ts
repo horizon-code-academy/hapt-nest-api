@@ -1,6 +1,6 @@
-import SessionDate from '../../src/session-date/session-date.interface';
 import { session, sessionA, sessionB } from './session.fake';
 import { user, userA, userB } from './user.fake';
+import { SessionDate } from '../../src/session-date/schemas/session-date.schema';
 
 export const sessionDateA: SessionDate = {
   _id: '1',

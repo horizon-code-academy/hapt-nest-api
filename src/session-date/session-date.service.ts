@@ -1,11 +1,22 @@
 import { HttpException, Injectable } from '@nestjs/common';
-import SessionDate from './session-date.interface';
 import { sessionDateList } from '../../test/fake/session-date.fake';
+import { InjectModel } from '@nestjs/mongoose';
+import { Model } from 'mongoose';
+import {
+  SessionDate,
+  SessionDateDocument,
+} from './schemas/session-date.schema';
 
 @Injectable()
 export class SessionDateService {
+  constructor(
+    @InjectModel(SessionDate.name)
+    private userModel: Model<SessionDateDocument>,
+  ) {}
+
   getSessionDate(id: string): SessionDate {
-    const result = sessionDateList.find((u) => u._id === id);
+    // badltha khater fy sessiondocument me themsh ``id
+    const result = sessionDateList.find((u) => u.note === id);
     if (result) return result;
     else throw new HttpException('Not found', 404);
   }

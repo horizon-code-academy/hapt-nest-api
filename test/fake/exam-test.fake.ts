@@ -1,7 +1,7 @@
-import ExamTest from '../../src/exam-test/exam-test.interface';
 import { sessionDateA } from './session-date.fake';
 import { user } from './user.fake';
 import { exam } from './exam.fake';
+import { ExamTest } from '../../src/exam-test/schemas/exam-test.schema';
 
 export const examTest: ExamTest = {
   _id: '1',

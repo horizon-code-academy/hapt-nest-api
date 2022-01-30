@@ -8,8 +8,8 @@ import {
   Put,
   Query,
 } from '@nestjs/common';
-import User from './user.interface';
 import { UserService } from './user.service';
+import { User } from './schemas/user.schema';
 
 @Controller('user')
 export class UserController {

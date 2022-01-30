@@ -1,6 +1,6 @@
-import Exam from '../../src/exam/exam.interface';
 import { subject } from './subject.fake';
 import { examTestList } from './exam-test.fake';
+import { Exam } from '../../src/exam/scheams/exam.schema';
 
 export const exam: Exam = {
   _id: '1',

@@ -27,7 +27,6 @@ export const userA: User = {
 };
 
 export const userB: User = {
-  _id: '3',
   email: 'khairi@gmail.com',
   password: 'khairi',
   phone: '96315379',

@@ -1,5 +1,5 @@
 import { Model } from 'mongoose';
-import { Injectable, HttpException } from '@nestjs/common';
+import { HttpException, Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { userList } from '../../test/fake/user.fake';
 import { User, UserDocument } from './schemas/user.schema';
@@ -13,6 +13,7 @@ export class UserService {
     const createdUser = new this.userModel(createUserDto);
     return createdUser.save();
   }
+
   async findAll(): Promise<User[]> {
     return this.userModel.find().exec();
   }
@@ -22,6 +23,7 @@ export class UserService {
     if (result) return result;
     else throw new HttpException('Not found', 404);
   }
+
   getUsers(name: string, phone: string, role: string): User[] {
     if (name || phone || role)
       return userList.filter(
@@ -32,12 +34,15 @@ export class UserService {
       );
     else return userList;
   }
+
   createUser(user: Partial<User>): User {
     return user as User;
   }
+
   updateUser(user: Partial<User>): User {
     return user as User;
   }
+
   deleteUser(id: string): void {
     console.log('DELETED ' + id);
   }

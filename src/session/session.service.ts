@@ -1,9 +1,15 @@
 import { HttpException, Injectable } from '@nestjs/common';
-import Session from './session.interface';
 import { sessionList } from '../../test/fake/session.fake';
+import { InjectModel } from '@nestjs/mongoose';
+import { Model } from 'mongoose';
+import { Session, SessionDocument } from './schemas/session.schema';
 
 @Injectable()
 export class SessionService {
+  constructor(
+    @InjectModel(Session.name) private userModel: Model<SessionDocument>,
+  ) {}
+
   getSession(id: string): Session {
     const result = sessionList.find((u) => u._id === id);
     if (result) return result;

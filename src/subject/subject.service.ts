@@ -1,9 +1,15 @@
 import { HttpException, Injectable } from '@nestjs/common';
-import Subject from './subject.interface';
 import { subjectList } from '../../test/fake/subject.fake';
+import { InjectModel } from '@nestjs/mongoose';
+import { Model } from 'mongoose';
+import { Subject, SubjectDocument } from './schemas/subject.schema';
 
 @Injectable()
 export class SubjectService {
+  constructor(
+    @InjectModel(Subject.name) private userModel: Model<SubjectDocument>,
+  ) {}
+
   getSubject(id: string): Subject {
     const result = subjectList.find((u) => u._id === id);
     if (result) return result;

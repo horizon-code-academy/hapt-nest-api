@@ -10,7 +10,7 @@ import {
 } from '@nestjs/common';
 
 import { SessionDateService } from './session-date.service';
-import SessionDate from './session-date.interface';
+import { SessionDate } from './schemas/session-date.schema';
 
 @Controller('session-date')
 export class SessionDateController {

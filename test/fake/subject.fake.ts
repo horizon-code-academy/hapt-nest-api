@@ -1,7 +1,6 @@
-import Subject from '../../src/subject/subject.interface';
+import { Subject } from '../../src/subject/schemas/subject.schema';
 
 export const subject: Subject = {
-  _id: '1',
   name: 'React',
   field: 'IT',
   nb_hour: 340,
@@ -10,7 +9,6 @@ export const subject: Subject = {
 };
 
 const subjectA: Subject = {
-  _id: '2',
   name: 'MongoDB',
   field: 'IT',
   nb_hour: 390,
@@ -18,7 +16,6 @@ const subjectA: Subject = {
   description: 'React , find , post ,  aggregation',
 };
 const subjectB: Subject = {
-  _id: '3',
   name: 'NodeJs',
   field: 'IT',
   nb_hour: 350,
