@@ -1,35 +1,21 @@
 import { HttpException, Injectable } from '@nestjs/common';
-import Subject from './subject.interface';
-import { subjectList } from '../../test/fake/subject.fake';
+import { InjectModel } from '@nestjs/mongoose';
+import { Model } from 'mongoose';
+import { Subject, SubjectDocument } from './schemas/subject.schema';
+import { CreateSubjectDto } from './dto/create-subject.dto';
 
 @Injectable()
 export class SubjectService {
-  getSubject(id: string): Subject {
-    const result = subjectList.find((u) => u._id === id);
-    if (result) return result;
-    else throw new HttpException('Not found', 404);
+  constructor(
+    @InjectModel(Subject.name) private userModel: Model<SubjectDocument>,
+  ) {}
+
+  async create(createSubjectDto: CreateSubjectDto): Promise<Subject> {
+    const createdSubject = new this.userModel(createSubjectDto);
+    return createdSubject.save();
   }
 
-  getSubjects(name: string, field: string, description: string): Subject[] {
-    if (name || field || description)
-      return subjectList.filter(
-        (u) =>
-          u.field === field ||
-          u.name.includes(name) ||
-          u.description.includes(description),
-      );
-    else return subjectList;
-  }
-
-  createSubject(subject: Partial<Subject>): Subject {
-    return subject as Subject;
-  }
-
-  updateSubject(subject: Partial<Subject>): Subject {
-    return subject as Subject;
-  }
-
-  deleteSubject(id: string): void {
-    console.log('DELETED ' + id);
+  async findAll(): Promise<Subject[]> {
+    return this.userModel.find().exec();
   }
 }
