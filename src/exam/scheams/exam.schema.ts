@@ -14,14 +14,14 @@ export class Exam {
   type: string;
 
   @Prop({
-    type: [{ type: Types.ObjectId, ref: ExamTest.name }],
+    type: [{ type: Types.ObjectId, ref: 'ExamTest' }],
   })
   examTests?: ExamTest[];
 
   @Prop({
     required: true,
     type: Types.ObjectId,
-    ref: Subject.name,
+    ref: 'Subject',
   })
   subject: Subject;
 }

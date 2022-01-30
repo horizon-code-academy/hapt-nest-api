@@ -16,16 +16,16 @@ export class SessionDate {
   @Prop({
     required: true,
     type: Types.ObjectId,
-    ref: Session.name,
+    ref: 'Session',
   })
   session: Session;
 
-  @Prop({ required: true, type: Types.ObjectId, ref: User.name })
+  @Prop({ required: true, type: Types.ObjectId, ref: 'User' })
   teacher: User;
 
   @Prop({
     required: true,
-    type: [{ type: Types.ObjectId, ref: User.name }],
+    type: [{ type: Types.ObjectId, ref: 'User' }],
   })
   attendees: User[];
 

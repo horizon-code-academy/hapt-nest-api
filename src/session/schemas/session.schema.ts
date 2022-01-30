@@ -18,20 +18,20 @@ export class Session {
 
   @Prop({
     required: true,
-    type: [{ type: Types.ObjectId, ref: User.name }],
+    type: [{ type: Types.ObjectId, ref: 'User' }],
   })
   teacher: User[];
 
   @Prop({
     required: true,
-    type: [{ type: Types.ObjectId, ref: User.name }],
+    type: [{ type: Types.ObjectId, ref: 'User' }],
   })
   students: User[];
 
   @Prop({
     required: true,
     type: Types.ObjectId,
-    ref: Subject.name,
+    ref: 'Subject',
   })
   subject: Subject;
 }

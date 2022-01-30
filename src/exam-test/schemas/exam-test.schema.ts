@@ -11,14 +11,14 @@ export class ExamTest {
   @Prop({
     required: true,
     type: Types.ObjectId,
-    ref: Exam.name,
+    ref: 'Exam',
   })
   exam: Exam;
 
   @Prop({
     required: true,
     type: Types.ObjectId,
-    ref: SessionDate.name,
+    ref: 'SessionDate',
   })
   sessionDate: SessionDate;
 
@@ -31,7 +31,7 @@ export class ExamTest {
   @Prop({
     required: true,
     type: Types.ObjectId,
-    ref: User.name,
+    ref: 'User',
   })
   student: User;
 }
