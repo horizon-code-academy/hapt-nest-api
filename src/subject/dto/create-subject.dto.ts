@@ -1,5 +1,5 @@
 export class CreateSubjectDto {
-  name: string;
+  label: string;
   field: string;
   nb_hour: number;
   price_hour: number;

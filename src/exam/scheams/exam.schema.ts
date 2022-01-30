@@ -8,7 +8,7 @@ export type ExamDocument = Exam & Document;
 @Schema()
 export class Exam {
   @Prop({ required: true, type: String })
-  name: string;
+  label: string;
 
   @Prop({ required: true, type: String })
   type: string;

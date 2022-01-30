@@ -8,7 +8,7 @@ export type SessionDocument = Session & Document;
 @Schema()
 export class Session {
   @Prop({ required: true, type: String })
-  name: string;
+  label: string;
 
   @Prop({ required: true, type: Date })
   start_date: Date;

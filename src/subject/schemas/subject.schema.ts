@@ -6,7 +6,7 @@ export type SubjectDocument = Subject & Document;
 @Schema()
 export class Subject {
   @Prop({ required: true, type: String })
-  name: string;
+  label: string;
 
   @Prop({ required: true, type: String })
   field: string;
