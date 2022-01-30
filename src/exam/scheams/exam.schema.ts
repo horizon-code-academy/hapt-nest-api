@@ -1,6 +1,7 @@
+import { Document, Types } from 'mongoose';
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import mongoose, { Document } from 'mongoose';
-import { Subject, SubjectDocument } from '../../subject/schemas/subject.schema';
+import { Subject } from '../../subject/schemas/subject.schema';
+import { ExamTest } from 'src/exam-test/schemas/exam-test.schema';
 
 export type ExamDocument = Exam & Document;
 
@@ -12,16 +13,15 @@ export class Exam {
   type: string;
   @Prop({
     required: true,
-    type: mongoose.Schema.Types.ObjectId,
+    type: Types.ObjectId,
     ref: Subject.name,
   })
-  subject: SubjectDocument;
+  subject: Subject;
   @Prop({
-    required: true,
-    type: [{ type: mongoose.Schema.Types.ObjectId }],
-    ref: Subject.name,
+    type: [{ type: Types.ObjectId }],
+    ref: ExamTest.name,
   })
-  examTests?: ExamDocument[];
+  examTests?: ExamTest[];
 }
 
 export const ExamSchema = SchemaFactory.createForClass(Exam);

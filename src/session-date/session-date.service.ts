@@ -1,11 +1,11 @@
 import { HttpException, Injectable } from '@nestjs/common';
-import { sessionDateList } from '../../test/fake/session-date.fake';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import {
   SessionDate,
   SessionDateDocument,
 } from './schemas/session-date.schema';
+import { CreatedSessionDateDto } from './dto/created-session-date.dto';
 
 @Injectable()
 export class SessionDateService {
@@ -14,31 +14,14 @@ export class SessionDateService {
     private userModel: Model<SessionDateDocument>,
   ) {}
 
-  getSessionDate(id: string): SessionDate {
-    // badltha khater fy sessiondocument me themsh ``id
-    const result = sessionDateList.find((u) => u.note === id);
-    if (result) return result;
-    else throw new HttpException('Not found', 404);
+  async create(
+    createdSessionDateDto: CreatedSessionDateDto,
+  ): Promise<SessionDate> {
+    const createdSessionDate = new this.userModel(createdSessionDateDto);
+    return createdSessionDate.save();
   }
 
-  getSessionDates(sessionName: string, start_date: Date): SessionDate[] {
-    console.log(sessionName, start_date);
-    if (sessionName || start_date) {
-      return sessionDateList.filter(
-        (u) => u.session.name === sessionName || u.start_date === start_date,
-      );
-    } else return sessionDateList;
-  }
-
-  createSessionDate(sessionDate: Partial<SessionDate>): SessionDate {
-    return sessionDate as SessionDate;
-  }
-
-  updateSessionDate(sessionDate: Partial<SessionDate>): SessionDate {
-    return sessionDate as SessionDate;
-  }
-
-  deleteSessionDate(id: string): void {
-    console.log('DELETED ' + id);
+  async findAll(): Promise<SessionDate[]> {
+    return this.userModel.find().exec();
   }
 }
