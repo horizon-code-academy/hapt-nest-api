@@ -1,6 +1,5 @@
 import { HttpException, Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
-
 import { Model } from 'mongoose';
 import { Exam, ExamDocument } from './scheams/exam.schema';
 import { CreateExamDto } from './dto/create-exam.dto';
