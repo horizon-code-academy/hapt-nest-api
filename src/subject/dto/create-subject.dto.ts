@@ -3,5 +3,5 @@ export class CreateSubjectDto {
   field: string;
   nb_hour: number;
   price_hour: number;
-  description: string;
+  description?: string;
 }
