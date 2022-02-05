@@ -1,5 +1,5 @@
 import { Model } from 'mongoose';
-import { HttpException, Injectable } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { User, UserDocument } from './schemas/user.schema';
 import { CreateUserDto } from './dto/create-user.dto';
@@ -17,15 +17,15 @@ export class UserService {
     return createdUser.save();
   }
 
+  async findAll(): Promise<User[]> {
+    return this.userModel.find().exec();
+  }
+
   async update(
     id: string,
     updateUserDto: UpdateUserDto,
   ): Promise</*UpdateResult*/ any> {
     return this.userModel.updateOne({ _id: id }, updateUserDto);
-  }
-
-  async findAll(): Promise<User[]> {
-    return this.userModel.find().exec();
   }
 
   async delete(id: string): Promise</*DeleteResult*/ any> {

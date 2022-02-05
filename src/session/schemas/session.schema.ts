@@ -10,7 +10,7 @@ export class Session {
   @Prop({ required: true, type: String })
   label: string;
 
-  @Prop({ required: true, type: Date })
+  @Prop({ default: Date.now, type: Date })
   start_date: Date;
 
   @Prop({ required: true, type: Date })
