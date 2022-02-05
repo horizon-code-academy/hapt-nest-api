@@ -1,6 +1,6 @@
 import Session from 'src/session/session.interface';
 import SessionDate from 'src/session-date/session-date.interface';
-import { IsDate, IsMongoId, IsOptional, IsString } from 'class-validator';
+import { IsDate, IsMongoId, IsOptional, MinLength } from 'class-validator';
 
 export class UpdateSessionDateDto {
   @IsDate()
@@ -19,6 +19,6 @@ export class UpdateSessionDateDto {
   @IsMongoId()
   teacher?: SessionDate;
   @IsOptional()
-  @IsString()
+  @MinLength(2)
   note?: string;
 }
