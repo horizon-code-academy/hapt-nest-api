@@ -6,7 +6,9 @@ import { CreateSubjectDto } from './dto/create-subject.dto';
 import { UpdateSubjectDto } from './dto/update-subject.dto';
 @Injectable()
 export class SubjectService {
-  constructor(@InjectModel(Subject.name) private subjectModel: Model<SubjectDocument>) { }
+  constructor(
+    @InjectModel(Subject.name) private subjectModel: Model<SubjectDocument>,
+  ) {}
 
   async create(createSubjectDto: CreateSubjectDto): Promise<Subject> {
     const createdSubject = new this.subjectModel({

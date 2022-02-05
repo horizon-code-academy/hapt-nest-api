@@ -7,7 +7,7 @@ import { UpdateExamDto } from './dto/update-exam.dto';
 
 @Injectable()
 export class ExamService {
-  constructor(@InjectModel(Exam.name) private examModel: Model<ExamDocument>) { }
+  constructor(@InjectModel(Exam.name) private examModel: Model<ExamDocument>) {}
 
   async create(createExamDto: CreateExamDto): Promise<Exam> {
     const createdExam = new this.examModel(createExamDto);
@@ -26,5 +26,4 @@ export class ExamService {
   async delete(id: string): Promise</*DeleteResult*/ any> {
     return this.examModel.deleteOne({ _id: id });
   }
-
 }

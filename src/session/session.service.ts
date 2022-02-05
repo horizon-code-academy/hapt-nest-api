@@ -9,7 +9,7 @@ import { UpdateSessionDto } from './dto/update-session.dto';
 export class SessionService {
   constructor(
     @InjectModel(Session.name) private sessionModel: Model<SessionDocument>,
-  ) { }
+  ) {}
 
   async create(createSessionDto: CreatedSessionDto): Promise<Session> {
     const createdSession = new this.sessionModel(createSessionDto);

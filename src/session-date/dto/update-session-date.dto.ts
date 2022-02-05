@@ -1,5 +1,5 @@
-import Session from "src/session/session.interface";
-import SessionDate from "src/session-date/session-date.interface";
+import Session from 'src/session/session.interface';
+import SessionDate from 'src/session-date/session-date.interface';
 
 export class UpdateSessionDateDto {
   start_date?: Date;

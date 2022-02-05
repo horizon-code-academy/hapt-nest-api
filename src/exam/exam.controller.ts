@@ -15,7 +15,7 @@ import { ExamService } from './exam.service';
 
 @Controller('exam')
 export class ExamController {
-  constructor(private readonly ExamService: ExamService) { }
+  constructor(private readonly ExamService: ExamService) {}
 
   @Get()
   findAll() {

@@ -9,7 +9,7 @@ import { UpdateExamTestDto } from './dto/update-exam-test.dto';
 export class ExamTestService {
   constructor(
     @InjectModel(ExamTest.name) private examTestModel: Model<ExamTestDocument>,
-  ) { }
+  ) {}
 
   async create(createExamTestDto: CreateExamTestDto): Promise<ExamTest> {
     const createdExamTest = new this.examTestModel(createExamTestDto);

@@ -16,7 +16,7 @@ import { SubjectService } from './subject.service';
 
 @Controller('subject')
 export class SubjectController {
-  constructor(private readonly subjectService: SubjectService) { }
+  constructor(private readonly subjectService: SubjectService) {}
   @Get()
   findAll() {
     return this.subjectService.findAll();

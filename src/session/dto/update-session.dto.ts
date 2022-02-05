@@ -1,5 +1,5 @@
-import Subject from "src/subject/subject.interface";
-import User from "src/user/user.interface";
+import Subject from 'src/subject/subject.interface';
+import User from 'src/user/user.interface';
 
 export class UpdateSessionDto {
   label?: string;

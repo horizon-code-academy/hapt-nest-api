@@ -13,7 +13,7 @@ export class SessionDateService {
   constructor(
     @InjectModel(SessionDate.name)
     private sessionDateModel: Model<SessionDateDocument>,
-  ) { }
+  ) {}
 
   async create(
     createdSessionDateDto: CreatedSessionDateDto,

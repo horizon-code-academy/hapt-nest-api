@@ -15,7 +15,7 @@ import { Session } from './schemas/session.schema';
 
 @Controller('session')
 export class SessionController {
-  constructor(private readonly SessionService: SessionService) { }
+  constructor(private readonly SessionService: SessionService) {}
 
   @Get()
   findAll() {

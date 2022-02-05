@@ -15,7 +15,7 @@ import { UpdateExamTestDto } from './dto/update-exam-test.dto';
 
 @Controller('exam-test')
 export class ExamTestController {
-  constructor(private readonly ExamTestService: ExamTestService) { }
+  constructor(private readonly ExamTestService: ExamTestService) {}
 
   @Get()
   findAll() {

@@ -16,14 +16,16 @@ import { SessionDateService } from './session-date.service';
 
 @Controller('session-date')
 export class SessionDateController {
-  constructor(private readonly SessionDateService: SessionDateService) { }
+  constructor(private readonly SessionDateService: SessionDateService) {}
   @Get()
   findAll() {
     return this.SessionDateService.findAll();
   }
 
   @Post()
-  create(@Body() createSessionDateDto: CreatedSessionDateDto): Promise<SessionDate> {
+  create(
+    @Body() createSessionDateDto: CreatedSessionDateDto,
+  ): Promise<SessionDate> {
     return this.SessionDateService.create(createSessionDateDto);
   }
 
