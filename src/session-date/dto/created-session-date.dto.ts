@@ -1,4 +1,4 @@
-import { IsDate, IsString } from 'class-validator';
+import { IsDate, IsMongoId, IsString } from 'class-validator';
 import { Session } from '../../session/schemas/session.schema';
 import { User } from '../../user/schemas/user.schema';
 
@@ -7,11 +7,11 @@ export class CreatedSessionDateDto {
   start_date: Date;
   @IsDate()
   end_date: Date;
-  @IsString()
+  @IsMongoId()
   session: Session;
-  @IsString()
+  @IsMongoId()
   attendees: User[];
-  @IsString()
+  @IsMongoId()
   teacher: User;
   @IsString()
   note?: string;
