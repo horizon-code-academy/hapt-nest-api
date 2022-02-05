@@ -12,11 +12,8 @@ export class UpdateSessionDto {
   @IsOptional()
   end_date?: Date;
   @IsOptional()
-  @Min(3)
   teacher?: User[];
   @IsOptional()
-  @Min(3)
   students?: User[];
-  @IsOptional()
   subject?: Subject;
 }
