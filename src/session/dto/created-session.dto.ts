@@ -1,8 +1,9 @@
 import { User } from '../../user/schemas/user.schema';
 import { Subject } from '../../subject/schemas/subject.schema';
-import { IsDate, IsOptional, Min } from 'class-validator';
+import { IsDate, IsOptional, IsString, Min } from 'class-validator';
 
 export class CreatedSessionDto {
+  @IsString()
   label: string;
   @IsDate()
   @IsOptional()
