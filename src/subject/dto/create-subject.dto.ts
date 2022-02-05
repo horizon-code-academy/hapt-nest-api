@@ -1,7 +1,7 @@
 import {
   IsNotEmpty,
   IsNumber,
-  IsOptional,
+  IsOptional, IsPositive,
   IsString,
   MaxLength,
   MinLength,
@@ -20,9 +20,11 @@ export class CreateSubjectDto {
   field: string;
   @IsNotEmpty()
   @IsNumber()
+  @IsPositive()
   nb_hour: number;
   @IsNotEmpty()
   @IsNumber()
+  @IsPositive()
   price_hour: number;
   @IsOptional()
   @IsString()
