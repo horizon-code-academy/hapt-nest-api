@@ -8,6 +8,7 @@ export class UpdateExamTestDto {
   exam?: Exam;
   @IsOptional()
   sessionDate?: SessionDate;
+  @IsNumberString()
   @IsOptional()
   score?: number;
   @IsNumberString()
