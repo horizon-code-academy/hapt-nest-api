@@ -1,9 +1,9 @@
 import {
+  IsArray,
   IsDate,
   IsEmail,
   IsOptional,
   IsPhoneNumber,
-  IsUrl,
   Length,
 } from 'class-validator';
 
@@ -29,7 +29,7 @@ export default class UpdateUserDto {
   address?: string;
   @IsOptional()
   avatar?: string;
-  @IsUrl()
+  @IsArray()
   @IsOptional()
   roles?: string[];
 }
