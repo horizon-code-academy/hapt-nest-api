@@ -10,37 +10,33 @@ import {
 } from '@nestjs/common';
 import { ExamTestService } from './exam-test.service';
 import ExamTest from './exam-test.interface';
+import { CreateExamTestDto } from './dto/create-exam-test.dto';
+import { UpdateExamTestDto } from './dto/update-exam-test.dto';
 
 @Controller('exam-test')
 export class ExamTestController {
   constructor(private readonly ExamTestService: ExamTestService) {}
 
   @Get()
-  getExamTests(
-    @Query('sessionDateId') sessionDateId: string,
-    @Query('examID') examID: string,
-    @Query('userID') userID: string,
-  ): ExamTest[] {
-    return this.ExamTestService.getExamTests(sessionDateId, examID, userID);
-  }
-
-  @Get(':id')
-  getExamTest(@Param('id') id: string): ExamTest {
-    return this.ExamTestService.getExamTest(id);
+  findAll() {
+    return this.ExamTestService.findAll();
   }
 
   @Post()
-  createExamTest(@Body() examTest: Partial<ExamTest>): ExamTest {
-    return this.ExamTestService.createExamTest(examTest);
+  create(@Body() createExamTestDto: CreateExamTestDto): Promise<ExamTest> {
+    return this.ExamTestService.create(createExamTestDto);
   }
 
-  @Put()
-  updateExamTest(@Body() examTest: Partial<ExamTest>): ExamTest {
-    return this.ExamTestService.updateExamTest(examTest);
+  @Put(':id')
+  update(
+    @Param('id') id: string,
+    @Body() updateExamTestDto: UpdateExamTestDto,
+  ): Promise<ExamTest> {
+    return this.ExamTestService.update(id, updateExamTestDto);
   }
 
   @Delete(':id')
-  deleteExamTest(@Param('id') id: string): void {
-    return this.ExamTestService.deleteExamTest(id);
+  delete(@Param('id') id: string) {
+    return this.ExamTestService.delete(id);
   }
 }

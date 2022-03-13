@@ -1,31 +1,40 @@
-import { Injectable, HttpException } from '@nestjs/common';
-import User from './user.interface';
-import { userList } from '../../test/fake/user.fake';
+import { Model } from 'mongoose';
+import { Injectable } from '@nestjs/common';
+import { InjectModel } from '@nestjs/mongoose';
+import { User, UserDocument } from './schemas/user.schema';
+import CreateUserDto from './dto/create-user.dto';
+import UpdateUserDto from './dto/update-user.dto';
 
 @Injectable()
 export class UserService {
-  getUser(id: string): User {
-    const result = userList.find((u) => u._id === id);
-    if (result) return result;
-    else throw new HttpException('Not found', 404);
+  constructor(@InjectModel(User.name) private userModel: Model<UserDocument>) {}
+
+  async findOneByEmail(email: string): Promise<User> {
+    return this.userModel.findOne({ email }).exec();
   }
-  getUsers(name: string, phone: string, role: string): User[] {
-    if (name || phone || role)
-      return userList.filter(
-        (u) =>
-          u.phone === phone ||
-          (u.firstName + ' ' + u.lastName).includes(name) ||
-          u.roles.includes(role),
-      );
-    else return userList;
+
+  async findAll(): Promise<User[]> {
+    return this.userModel.find().exec();
   }
-  createUser(user: Partial<User>): User {
-    return user as User;
+
+  async create(createUserDto: CreateUserDto): Promise<User> {
+    const createdUser = new this.userModel(
+      createUserDto /*{
+      ...createUserDto,
+      roles: ['student'],
+    }*/,
+    );
+    return createdUser.save();
   }
-  updateUser(user: Partial<User>): User {
-    return user as User;
+
+  async update(
+    id: string,
+    updateUserDto: UpdateUserDto,
+  ): Promise</*UpdateResult*/ any> {
+    return this.userModel.updateOne({ _id: id }, updateUserDto);
   }
-  deleteUser(id: string): void {
-    console.log('DELETED ' + id);
+
+  async delete(id: string): Promise</*DeleteResult*/ any> {
+    return this.userModel.deleteOne({ _id: id });
   }
 }

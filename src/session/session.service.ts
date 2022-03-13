@@ -1,32 +1,31 @@
 import { HttpException, Injectable } from '@nestjs/common';
-import Session from './session.interface';
-import { sessionList } from '../../test/fake/session.fake';
+import { InjectModel } from '@nestjs/mongoose';
+import { Model } from 'mongoose';
+import { Session, SessionDocument } from './schemas/session.schema';
+import { CreatedSessionDto } from './dto/created-session.dto';
+import { UpdateSessionDto } from './dto/update-session.dto';
 
 @Injectable()
 export class SessionService {
-  getSession(id: string): Session {
-    const result = sessionList.find((u) => u._id === id);
-    if (result) return result;
-    else throw new HttpException('Not found', 404);
+  constructor(
+    @InjectModel(Session.name) private sessionModel: Model<SessionDocument>,
+  ) {}
+
+  async create(createSessionDto: CreatedSessionDto): Promise<Session> {
+    const createdSession = new this.sessionModel(createSessionDto);
+    return createdSession.save();
+  }
+  async update(
+    id: string,
+    updateSessionDto: UpdateSessionDto,
+  ): Promise</*UpdateResult*/ any> {
+    return this.sessionModel.updateOne({ _id: id }, updateSessionDto);
   }
 
-  getSessions(name: string, start_date: Date): Session[] {
-    if (name || start_date)
-      return sessionList.filter(
-        (u) => u.name === name || u.start_date === start_date,
-      );
-    else return sessionList;
+  async findAll(): Promise<Session[]> {
+    return this.sessionModel.find().exec();
   }
-
-  createSession(session: Partial<Session>): Session {
-    return session as Session;
-  }
-
-  updateSession(session: Partial<Session>): Session {
-    return session as Session;
-  }
-
-  deleteSession(id: string): void {
-    console.log('DELETED ' + id);
+  async delete(id: string): Promise</*DeleteResult*/ any> {
+    return this.sessionModel.deleteOne({ _id: id });
   }
 }

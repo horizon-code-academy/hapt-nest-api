@@ -1,6 +1,5 @@
 export default interface Subject {
-  _id: string;
-  name: string;
+  label: string;
   field: string;
   nb_hour: number;
   price_hour: number;

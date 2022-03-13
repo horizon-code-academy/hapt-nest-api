@@ -1,39 +1,32 @@
 import { HttpException, Injectable } from '@nestjs/common';
-import ExamTest from './exam-test.interface';
-import { examTestList } from '../../test/fake/exam-test.fake';
+import { InjectModel } from '@nestjs/mongoose';
+import { Model } from 'mongoose';
+import { ExamTest, ExamTestDocument } from './schemas/exam-test.schema';
+import { CreateExamTestDto } from './dto/create-exam-test.dto';
+import { UpdateExamTestDto } from './dto/update-exam-test.dto';
 
 @Injectable()
 export class ExamTestService {
-  getExamTest(id: string): ExamTest {
-    const result = examTestList.find((u) => u._id === id);
-    if (result) return result;
-    else throw new HttpException('Not found', 404);
+  constructor(
+    @InjectModel(ExamTest.name) private examTestModel: Model<ExamTestDocument>,
+  ) {}
+
+  async create(createExamTestDto: CreateExamTestDto): Promise<ExamTest> {
+    const createdExamTest = new this.examTestModel(createExamTestDto);
+    return createdExamTest.save();
   }
 
-  getExamTests(
-    sessionDateId: string,
-    examID: string,
-    userID: string,
-  ): ExamTest[] {
-    if (sessionDateId || examID || userID)
-      return examTestList.filter(
-        (u) =>
-          u.sessionDate._id === sessionDateId ||
-          u.exam._id === examID ||
-          u.student._id === userID,
-      );
-    else return examTestList;
+  async update(
+    id: string,
+    updateExamTestDto: UpdateExamTestDto,
+  ): Promise</*UpdateResult*/ any> {
+    return this.examTestModel.updateOne({ _id: id }, updateExamTestDto);
   }
 
-  createExamTest(examTest: Partial<ExamTest>): ExamTest {
-    return examTest as ExamTest;
+  async findAll(): Promise<ExamTest[]> {
+    return this.examTestModel.find().exec();
   }
-
-  updateExamTest(examTest: Partial<ExamTest>): ExamTest {
-    return examTest as ExamTest;
-  }
-
-  deleteExamTest(id: string): void {
-    console.log('DELETED ' + id);
+  async delete(id: string): Promise</*DeleteResult*/ any> {
+    return this.examTestModel.deleteOne({ _id: id });
   }
 }

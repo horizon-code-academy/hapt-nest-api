@@ -1,30 +1,29 @@
-import { HttpException, Injectable } from '@nestjs/common';
-import Exam from '../exam/exam.interface';
-import { examList } from '../../test/fake/exam.fake';
+import { Injectable } from '@nestjs/common';
+import { InjectModel } from '@nestjs/mongoose';
+import { Model } from 'mongoose';
+import { Exam, ExamDocument } from './scheams/exam.schema';
+import { CreateExamDto } from './dto/create-exam.dto';
+import { UpdateExamDto } from './dto/update-exam.dto';
 
 @Injectable()
 export class ExamService {
-  getExam(id: string): Exam {
-    const result = examList.find((u) => u._id === id);
-    if (result) return result;
-    else throw new HttpException('Not found', 404);
+  constructor(@InjectModel(Exam.name) private examModel: Model<ExamDocument>) {}
+
+  async create(createExamDto: CreateExamDto): Promise<Exam> {
+    const createdExam = new this.examModel(createExamDto);
+    return createdExam.save();
   }
 
-  getExams(name: string, type: string): Exam[] {
-    if (name || type)
-      return examList.filter((u) => u.name === name || u.type === type);
-    else return examList;
+  async update(
+    id: string,
+    updateExamDto: UpdateExamDto,
+  ): Promise</*UpdateResult*/ any> {
+    return this.examModel.updateOne({ _id: id }, updateExamDto);
   }
-
-  createExam(exam: Partial<Exam>): Exam {
-    return exam as Exam;
+  async findAll(): Promise<Exam[]> {
+    return this.examModel.find().exec();
   }
-
-  updateExam(exam: Partial<Exam>): Exam {
-    return exam as Exam;
-  }
-
-  deleteExam(id: string): void {
-    console.log('DELETED ' + id);
+  async delete(id: string): Promise</*DeleteResult*/ any> {
+    return this.examModel.deleteOne({ _id: id });
   }
 }

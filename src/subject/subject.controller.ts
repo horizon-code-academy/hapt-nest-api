@@ -8,39 +8,35 @@ import {
   Put,
   Query,
 } from '@nestjs/common';
+import { CreateSubjectDto } from './dto/create-subject.dto';
+import { UpdateSubjectDto } from './dto/update-subject.dto';
 import Subject from './subject.interface';
+
 import { SubjectService } from './subject.service';
 
 @Controller('subject')
 export class SubjectController {
   constructor(private readonly subjectService: SubjectService) {}
-
   @Get()
-  getSubjects(
-    @Query('field') field: string,
-    @Query('name') name: string,
-    @Query('description') description: string,
-  ): Subject[] {
-    return this.subjectService.getSubjects(name, field, description);
-  }
-
-  @Get(':id')
-  getSubject(@Param('id') id: string): Subject {
-    return this.subjectService.getSubject(id);
+  findAll() {
+    return this.subjectService.findAll();
   }
 
   @Post()
-  createSubject(@Body() subject: Partial<Subject>): Subject {
-    return this.subjectService.createSubject(subject);
+  create(@Body() createSubjectDto: CreateSubjectDto): Promise<Subject> {
+    return this.subjectService.create(createSubjectDto);
   }
 
-  @Put()
-  updateSubject(@Body() subject: Partial<Subject>): Subject {
-    return this.subjectService.updateSubject(subject);
+  @Put(':id')
+  update(
+    @Param('id') id: string,
+    @Body() updateSubjectDto: UpdateSubjectDto,
+  ): Promise<Subject> {
+    return this.subjectService.update(id, updateSubjectDto);
   }
 
   @Delete(':id')
-  deleteSubject(@Param('id') id: string): void {
-    return this.subjectService.deleteSubject(id);
+  delete(@Param('id') id: string) {
+    return this.subjectService.delete(id);
   }
 }

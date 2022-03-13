@@ -8,38 +8,35 @@ import {
   Put,
   Query,
 } from '@nestjs/common';
+import { CreatedSessionDto } from './dto/created-session.dto';
+import { UpdateSessionDto } from './dto/update-session.dto';
 import { SessionService } from './session.service';
-import Session from './session.interface';
+import { Session } from './schemas/session.schema';
 
 @Controller('session')
 export class SessionController {
   constructor(private readonly SessionService: SessionService) {}
 
   @Get()
-  getSessions(
-    @Query('name') name: string,
-    @Query('start_date') start_date: Date,
-  ): Session[] {
-    return this.SessionService.getSessions(name, start_date);
-  }
-
-  @Get(':id')
-  getSession(@Param('id') id: string): Session {
-    return this.SessionService.getSession(id);
+  findAll() {
+    return this.SessionService.findAll();
   }
 
   @Post()
-  createSession(@Body() session: Partial<Session>): Session {
-    return this.SessionService.createSession(session);
+  create(@Body() createSessionDto: CreatedSessionDto): Promise<Session> {
+    return this.SessionService.create(createSessionDto);
   }
 
-  @Put()
-  updateSession(@Body() session: Partial<Session>): Session {
-    return this.SessionService.updateSession(session);
+  @Put(':id')
+  update(
+    @Param('id') id: string,
+    @Body() updateSessionDto: UpdateSessionDto,
+  ): Promise<Session> {
+    return this.SessionService.update(id, updateSessionDto);
   }
 
   @Delete(':id')
-  deleteSession(@Param('id') id: string): void {
-    return this.SessionService.deleteSession(id);
+  delete(@Param('id') id: string) {
+    return this.SessionService.delete(id);
   }
 }

@@ -6,9 +6,12 @@ import {
   Param,
   Post,
   Put,
-  Query,
+  UseGuards,
 } from '@nestjs/common';
-import User from './user.interface';
+import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
+import CreateUserDto from './dto/create-user.dto';
+import UpdateUserDto from './dto/update-user.dto';
+import { User } from './schemas/user.schema';
 import { UserService } from './user.service';
 
 @Controller('user')
@@ -16,31 +19,26 @@ export class UserController {
   constructor(private readonly userService: UserService) {}
 
   @Get()
-  getUsers(
-    @Query('role') role: string,
-    @Query('name') name: string,
-    @Query('phone') phone: string,
-  ): User[] {
-    return this.userService.getUsers(name, phone, role);
-  }
-
-  @Get(':id')
-  getUser(@Param('id') id: string): User {
-    return this.userService.getUser(id);
+  @UseGuards(JwtAuthGuard)
+  findAll() {
+    return this.userService.findAll();
   }
 
   @Post()
-  createUser(@Body() user: Partial<User>): User {
-    return this.userService.createUser(user);
+  create(@Body() createUserDto: CreateUserDto): Promise<User> {
+    return this.userService.create(createUserDto);
   }
 
-  @Put()
-  updateUser(@Body() user: Partial<User>): User {
-    return this.userService.updateUser(user);
+  @Put(':id')
+  update(
+    @Param('id') id: string,
+    @Body() updateUserDto: UpdateUserDto,
+  ): Promise<User> {
+    return this.userService.update(id, updateUserDto);
   }
 
   @Delete(':id')
-  deleteUser(@Param('id') id: string): void {
-    return this.userService.deleteUser(id);
+  delete(@Param('id') id: string) {
+    return this.userService.delete(id);
   }
 }
