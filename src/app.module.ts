@@ -6,6 +6,7 @@ import { SessionModule } from './session/session.module';
 import { ExamModule } from './exam/exam.module';
 import { ExamTestModule } from './exam-test/exam-test.module';
 import { SessionDateModule } from './session-date/session-date.module';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [
@@ -16,6 +17,7 @@ import { SessionDateModule } from './session-date/session-date.module';
     ExamModule,
     ExamTestModule,
     SessionDateModule,
+    AuthModule,
   ],
 })
 export class AppModule {}
