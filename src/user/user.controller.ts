@@ -15,11 +15,16 @@ import { User } from './schemas/user.schema';
 import { UserService } from './user.service';
 
 @Controller('user')
+@UseGuards(JwtAuthGuard)
 export class UserController {
   constructor(private readonly userService: UserService) {}
 
+  @Get(':id')
+  findOne(@Param('id') _id: string) {
+    return this.userService.findOne(_id);
+  }
+
   @Get()
-  @UseGuards(JwtAuthGuard)
   findAll() {
     return this.userService.findAll();
   }
