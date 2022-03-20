@@ -11,7 +11,7 @@ import {
 export class CreateSubjectDto {
   @IsNotEmpty()
   @IsString()
-  @MaxLength(10)
+  @MaxLength(25)
   @MinLength(2)
   label: string;
   @IsNotEmpty()

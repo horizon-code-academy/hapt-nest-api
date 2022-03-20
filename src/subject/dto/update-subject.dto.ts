@@ -10,7 +10,7 @@ import {
 export class UpdateSubjectDto {
   @IsOptional()
   @IsString()
-  @MaxLength(10)
+  @MaxLength(25)
   @MinLength(2)
   label: string;
   @IsOptional()
