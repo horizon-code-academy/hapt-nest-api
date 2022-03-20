@@ -4,6 +4,7 @@ import User from 'src/user/user.interface';
 
 export class UpdateSessionDto {
   @IsMongoId()
+  @IsOptional()
   _id?: string;
   label?: string;
   @IsDate()

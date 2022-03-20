@@ -10,6 +10,7 @@ import {
 
 export default class UpdateUserDto {
   @IsMongoId()
+  @IsOptional()
   _id?: string;
   @IsEmail()
   @IsOptional()

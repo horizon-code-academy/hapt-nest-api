@@ -4,6 +4,7 @@ import { IsDate, IsMongoId, IsOptional, MinLength } from 'class-validator';
 
 export class UpdateSessionDateDto {
   @IsMongoId()
+  @IsOptional()
   _id?: string;
   @IsDate()
   @IsOptional()

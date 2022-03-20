@@ -5,6 +5,7 @@ import {
   IsPhoneNumber,
   IsUrl,
   Length,
+  IsArray,
 } from 'class-validator';
 
 export default class CreateUserDto {
@@ -25,4 +26,7 @@ export default class CreateUserDto {
   @IsOptional()
   @IsUrl()
   avatar?: string;
+  @IsArray()
+  @IsOptional()
+  roles?: string[];
 }

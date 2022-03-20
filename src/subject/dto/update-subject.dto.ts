@@ -10,6 +10,7 @@ import {
 
 export class UpdateSubjectDto {
   @IsMongoId()
+  @IsOptional()
   _id?: string;
   @IsOptional()
   @IsString()
