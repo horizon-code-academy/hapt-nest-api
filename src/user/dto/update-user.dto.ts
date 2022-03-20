@@ -1,4 +1,5 @@
 import {
+  IsMongoId,
   IsArray,
   IsDate,
   IsEmail,
@@ -8,6 +9,8 @@ import {
 } from 'class-validator';
 
 export default class UpdateUserDto {
+  @IsMongoId()
+  _id?: string;
   @IsEmail()
   @IsOptional()
   email?: string;

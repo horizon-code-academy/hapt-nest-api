@@ -1,4 +1,5 @@
 import {
+  IsMongoId,
   IsNumber,
   IsOptional,
   IsPositive,
@@ -8,6 +9,8 @@ import {
 } from 'class-validator';
 
 export class UpdateSubjectDto {
+  @IsMongoId()
+  _id?: string;
   @IsOptional()
   @IsString()
   @MaxLength(25)

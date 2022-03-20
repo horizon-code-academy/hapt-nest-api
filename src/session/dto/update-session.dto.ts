@@ -1,8 +1,10 @@
-import { IsDate, IsOptional, Min, MinDate } from 'class-validator';
+import { IsDate, IsOptional, Min, IsMongoId } from 'class-validator';
 import Subject from 'src/subject/subject.interface';
 import User from 'src/user/user.interface';
 
 export class UpdateSessionDto {
+  @IsMongoId()
+  _id?: string;
   label?: string;
   @IsDate()
   @IsOptional()

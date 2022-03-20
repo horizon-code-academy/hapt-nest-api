@@ -3,6 +3,8 @@ import SessionDate from 'src/session-date/session-date.interface';
 import { IsDate, IsMongoId, IsOptional, MinLength } from 'class-validator';
 
 export class UpdateSessionDateDto {
+  @IsMongoId()
+  _id?: string;
   @IsDate()
   @IsOptional()
   start_date?: Date;
