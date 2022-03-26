@@ -6,6 +6,7 @@ import { LocalStrategy } from './local.strategy';
 import { AuthController } from './auth.controller';
 import { JwtModule } from '@nestjs/jwt';
 import { JwtStrategy } from './jwt.strategy';
+import { CurrentUserInterceptor } from './user.interceptor';
 
 export const jwtConstants = {
   secret: 'g§ueve45u§eyvZeicne',
@@ -20,7 +21,7 @@ export const jwtConstants = {
       signOptions: { expiresIn: 60 * 60 * 8 + 's' },
     }),
   ],
-  providers: [AuthService, LocalStrategy, JwtStrategy],
+  providers: [AuthService, LocalStrategy, JwtStrategy, CurrentUserInterceptor],
   controllers: [AuthController],
   exports: [AuthService],
 })

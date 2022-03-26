@@ -7,6 +7,10 @@ import { ExamModule } from './exam/exam.module';
 import { ExamTestModule } from './exam-test/exam-test.module';
 import { SessionDateModule } from './session-date/session-date.module';
 import { AuthModule } from './auth/auth.module';
+import { UserService } from './user/user.service';
+import { AuthService } from './auth/auth.service';
+import { APP_INTERCEPTOR } from '@nestjs/core';
+import { CurrentUserInterceptor } from './auth/user.interceptor';
 
 @Module({
   imports: [
@@ -18,6 +22,12 @@ import { AuthModule } from './auth/auth.module';
     ExamTestModule,
     SessionDateModule,
     AuthModule,
+  ],
+  providers: [
+    {
+      provide: APP_INTERCEPTOR,
+      useClass: CurrentUserInterceptor,
+    },
   ],
 })
 export class AppModule {}

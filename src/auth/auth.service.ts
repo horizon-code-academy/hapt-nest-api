@@ -12,7 +12,9 @@ export class AuthService {
   ) {}
 
   async getMe(user: any) {
-    return this.userService.findOne(user.userId);
+    console.log(user);
+    if (user) return this.userService.findOne(user);
+    else new HttpException('I dont know you!', HttpStatus.NOT_FOUND);
   }
 
   async validateUser(username: string, pass: string): Promise<any> {
